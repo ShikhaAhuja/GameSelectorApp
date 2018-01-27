@@ -1,0 +1,58 @@
+<div class="container-fluid">
+
+  <h1 class="text-center" style="color:orangered">
+    Game Selector
+  </h1>
+  <br/>
+  <br/>
+
+
+
+  <h3 class="text-center" style="color: orangered">Selected Game:
+
+    <ng-template #defaultSelected>
+      <span [class.orangeColorClass]="!selectedGame">----------</span>
+    </ng-template>
+
+    <span *ngIf="selectedGame; else defaultSelected" [class.greenColorClass]="selectedGame">
+      {{selectedGame}}
+    </span>
+
+  </h3>
+
+  <br/>
+  <br/>
+
+
+  <div class="container" *ngIf="!showList">
+    <div class="row">
+      <div class="col-sm-4" *ngFor="let game of GamesArray">
+        <img class="rounded" [src]="game.ImageSrc" height="75%" width="75%" (click)="selectedGame = game.GameName; players = game.PlayersList; showList = true;"
+        />
+        <br/>
+        <span style="color:orangered">{{game.GameName}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" *ngIf="showList">
+    <div class="row">
+      <div class="col-sm-4 offset-sm-4">
+        <h4 style="color:white;">Player's List</h4><br/><br/>
+        <ul>
+          <li *ngFor="let player of players" style="color:white">
+            <h4>{{player}}</h4>
+          </li>
+        </ul>
+        <br/>
+        <br/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4 offset-sm-4">
+        <button type="button" class="btn btn-success" (click)="showList = false; selectedGame = '';">Back</button>
+      </div>
+    </div>
+  </div>
+
+</div>
